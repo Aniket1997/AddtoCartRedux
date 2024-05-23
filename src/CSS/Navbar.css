@@ -38,3 +38,25 @@
     border-color: transparent;
     box-shadow: none;
   }
+
+  .cart-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .cart-icon {
+    position: relative;
+  }
+  
+  .badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
