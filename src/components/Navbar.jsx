@@ -34,7 +34,7 @@ const Navbar = () => {
             placeholder="Search here"
             autoComplete="off"
             onChange={(e) => dispatch(setSearch(e.target.value))}
-            className="p-3 border border-gray-400 text-sm rounded-lg w-full lg:w-[25vw] search_input"
+            className="p-3 h-3 text-sm rounded-lg w-full lg:w-[25vw] search_input"
           />
         </div>
         <Link to="/cart">

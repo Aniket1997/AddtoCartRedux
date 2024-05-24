@@ -39,7 +39,7 @@ const FoodItems = () => {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="flex flex-wrap gap-10 justify-center lg:justify-center mx-6 my-10">
+      <div className="flex flex-wrap gap-10  justify-center lg:justify-center gap-6 mx-6 my-10">
         {currentItems.map((food) => (
           <FoodCard
             key={food.id}

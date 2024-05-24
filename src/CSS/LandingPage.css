@@ -1,0 +1,73 @@
+/* LandingPage.css */
+.landing-page {
+  text-align: center;
+  padding: 0px 117px;
+}
+
+.landing-page video {
+  margin-top: 20px;
+  /* border: 2px solid #ccc; */
+  border-radius: 6%;
+}
+
+.landing_text {
+  padding: 71px 0px;
+  font-size: 59px;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 640px) {
+  .landing_text {
+    padding: 0px 0px;
+    font-size: 34px;
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.button_landing {
+  margin-top: 43px;
+  border-radius: 28px;
+  font-size: 32px;
+  width: 276px;
+  background: #3b82f6;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: white;
+  padding: 10px;
+}
+
+@media (max-width: 640px) {
+  .button_landing {
+    /* margin-top: 43px; */
+    margin-top: 0px;
+    border-radius: 35px;
+    font-size: 19px;
+    width: 182px;
+    background: #3b82f6;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    color: white;
+    padding: 10px;
+  }
+  .carousel-inner {
+    padding: 0px 38px !important;
+}
+}
+
+.landing_text_brand_name {
+  color: #3b82f6;
+}
+
+.carousel-indicators button {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 100% !important;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: none !important;
+}

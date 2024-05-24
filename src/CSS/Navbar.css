@@ -15,10 +15,26 @@
     background: #3b82f6;
     border-radius: 11px;
 }
+@media (max-width: 640px) {
+    .brand_img {
+      height: 39px;
+      width: 39px;
+      background: #3b82f6;
+      border-radius: 11px;
+    }
+    
+  }
+  
 .brand_name
 {
     margin-left: 20px;
 }
+@media (max-width: 640px) {
+    .brand_name {
+        margin-left: 6px;
+        font-size: 18px !important;
+    }
+  }
 .search_field
 {
     display: flex;
