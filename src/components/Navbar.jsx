@@ -1,23 +1,45 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setSearch } from "../redux/slices/SearchSlice";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { GoSearch } from "react-icons/go";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Logo from "../assets/logo.png";
 import "../CSS/Navbar.css";
-import { IoIosHeartEmpty } from "react-icons/io";
 import Badge from "@mui/material/Badge";
-import MailIcon from "@mui/icons-material/Mail";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { logout } from "../redux/slices/authSlice";
 
 const Navbar = () => {
   const cartItems = useSelector((state) => state.cart.cart);
-  const wishListItem = useSelector((state)=>state.wishlist.wishList);
-  console.log(wishListItem.length);
+  const wishListItem = useSelector((state) => state.wishlist.wishList);
+  const auth = useSelector((state) => state.auth);
+  const isLoggedIn = auth.isLoggedIn; // Get isLoggedIn status
+  const navigate = useNavigate();
   const cartItemSize = cartItems.length;
   const wishListItemSize = wishListItem.length;
   const dispatch = useDispatch();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleProfileClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleProfileClose = () => {
+    setAnchorEl(null);
+  };
+  const handleLogout =()=>
+  {
+   dispatch(logout());
+   navigate('/login')
+  }
+  const handleGoToProfileClick =()=>{
+    navigate('/profile')
+  }
+
   return (
     <nav className="flex flex-col lg:flex-row justify-between items-center py-3 mx-6 mb-10 navbar_main">
       <div className="brand flex items-center gap-2">
@@ -30,7 +52,6 @@ const Navbar = () => {
           <input
             type="search"
             name="search"
-            id=""
             placeholder="Search here"
             autoComplete="off"
             onChange={(e) => dispatch(setSearch(e.target.value))}
@@ -38,8 +59,6 @@ const Navbar = () => {
           />
         </div>
         <Link to="/cart">
-          {/* <FaShoppingCart size={25} className="cursor-pointer" />
-          {cartItemSize > 0 && <span className="badge">{cartItemSize}</span>} */}
           <Badge badgeContent={cartItemSize} color="primary">
             <ShoppingCartIcon color="action" style={{ color: "black" }} />
           </Badge>
@@ -49,23 +68,49 @@ const Navbar = () => {
             <FavoriteIcon size={25} className="cursor-pointer" />
           </Badge>
         </Link>
-        <div className="relative">
-          {/* <MdAccountCircle size={25} className="cursor-pointer" /> */}
-          <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg hidden profile_dropdown">
-            <div className="p-2 border-b flex items-center">
-              {/* <img src={Avatar} alt="Avatar" className="w-10 h-10 rounded-full mr-2" /> */}
-              <span className="font-bold">Username</span>
-            </div>
-            <div className="p-2">
-              <Link to="/profile" className="block py-1">
-                Profile
-              </Link>
-              <Link to="/logout" className="block py-1">
-                Logout
-              </Link>
-            </div>
-          </div>
-        </div>
+        {/* Conditional rendering based on isLoggedIn status */}
+        {isLoggedIn ? (
+          <>
+            <Button
+              id="basic-button"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleProfileClick}
+            >
+              <AccountCircleIcon/>
+            </Button>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleProfileClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+            >
+              <MenuItem onClick={handleGoToProfileClick}>
+              Profile
+              </MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </Menu>
+          </>
+        ) : (
+          <>
+            <Link
+              to="/login"
+              className="btn btn-primary px-4 py-2 rounded-lg text-white"
+            >
+              Login
+            </Link>
+            <Link
+              to="/signup"
+              className="btn btn-secondary px-4 py-2 rounded-lg text-white"
+            >
+              Signup
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );

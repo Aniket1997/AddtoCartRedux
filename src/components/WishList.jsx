@@ -30,7 +30,7 @@ const WishList = () => {
               fontSize:"100px"
             }}>Wish List Is Empty</h1>
             <button
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate("/home")}
                     style={{backgroundColor:'rgb(210 210 210)'}}
                     className="bg-grey-500 font-bold px-3 text-black py-2 rounded-lg mt-3"
                   >

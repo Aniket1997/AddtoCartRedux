@@ -14,11 +14,8 @@ import Navbar from "./Navbar";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cart);
-  console.log({ cartItems });
   const locations = cartItems.map((item) => item.location);
-  console.log(locations);
   const uniqueLocations = [...new Set(locations)];
-  console.log(uniqueLocations);
   const totalQty = cartItems.reduce((totalQty, item) => totalQty + item.qty, 0);
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.qty * item.price,
@@ -73,7 +70,7 @@ const Cart = () => {
             </h3>
             <div className="cart_checkout_actions">
               <button
-                onClick={() => navigate("/success")}
+                onClick={() => navigate("/orderDetails")}
                 className="bg-blue-500 font-bold px-3 text-white py-2 rounded-lg mt-3"
               >
                 Checkout
@@ -81,7 +78,7 @@ const Cart = () => {
               {totalPrice === 0 ? (
                 <>
                   <button
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate("/home")}
                     style={{backgroundColor:'rgb(210 210 210)'}}
                     className="bg-grey-500 font-bold px-3 text-black py-2 rounded-lg mt-3"
                   >
