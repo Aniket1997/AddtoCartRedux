@@ -6,18 +6,16 @@ import {
   removeFromCart,
   incrementQty,
   decrementQty,
-  addToCart
+  addToCart,
 } from "../redux/slices/CartSlice";
-import {
-  removeFromWishList
-} from '../redux/slices/WishListSlice';
+import { removeFromWishList } from "../redux/slices/WishListSlice";
 import { addToWishList } from "../redux/slices/WishListSlice"; // Import addToWishList action
 import { toast } from "react-hot-toast";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import '../CSS/ItemCart.css'
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import "../CSS/ItemCart.css";
 
-const ItemCard = ({ id, title, description,location, qty, price, img }) => {
+const ItemCard = ({ id, title, description, location, qty, price, img }) => {
   const dispatch = useDispatch();
 
   return (
@@ -37,9 +35,11 @@ const ItemCard = ({ id, title, description,location, qty, price, img }) => {
         </p>
         {location === "cart" ? (
           <>
-            <div className="flex justify-start items-center mt-2">
-              <span className="text-blue-500 font-bold mr-3 cart_item_price">₹{price}</span>
-              <div className="flex items-center gap-2">
+            <div className="flex mt-2 quantity_item_action">
+              <span className="text-blue-500 font-bold mr-3 cart_item_price">
+                ₹{price}
+              </span>
+              <div className="flex gap-2">
                 <AiOutlineMinus
                   onClick={() => dispatch(decrementQty({ id }))}
                   size={30}
@@ -58,72 +58,84 @@ const ItemCard = ({ id, title, description,location, qty, price, img }) => {
           </>
         ) : null}
       </div>
-      {
-        location === 'cart'?(
-          <>
+      {location === "cart" ? (
+        <>
           <div className="cart_delete_add_wishlist">
-        <MdDelete
-          onClick={() => {
-            dispatch(
-              removeFromCart({ id, img, description, title, price, qty })
-            );
-            toast(`${title} Removed!`, {
-              icon: "👋",
-            });
-          }}
-          size={30}
-          color="#C70039"
-          className="text-gray-600 cursor-pointer lg:self-auto"
-        />
-        <VolunteerActivismIcon
-          onClick={() => {
-            dispatch(addToWishList({ id, title, description, price, img }));
-            toast(`${title} Added to Wishlist!`, {
-              icon: "🌟",
-            });
-            dispatch(
-              removeFromCart({ id, img, description, title, price, qty }));
-            toast(`${title} Removed!`, {
-              icon: "👋",
-            });
-          }}
-          size={30}
-          style={{ fontSize: 30, color: '#3B82F6' }}
-          className="cursor-pointer lg:self-auto"
-        />
-      </div>
-          </>
-        ):(<>
-          <MdDelete
-          onClick={() => {
-            dispatch(
-              removeFromWishList({ id, img, description, title, price })
-            );
-            toast(`${title} Removed!`, {
-              icon: "👋",
-            });
-          }}
-          size={30}
-          color="#C70039"
-          className="text-gray-600 cursor-pointer lg:self-auto"
-        />
-        <AddShoppingCartIcon
-          onClick={() => {
-            dispatch(addToCart({ id, title, description, price,location:'cart', img, qty: 1 }));
-            dispatch(
-              removeFromWishList({ id, img, description, title, price })
-            );
-            toast(`${title} Added`, {
-              icon: "👋",
-            });
-          }}
-          size={30}
-          color="#C70039"
-          className="text-gray-600 cursor-pointer lg:self-auto"
-        />
-        </>)
-      }
-      
+            <MdDelete
+              onClick={() => {
+                dispatch(
+                  removeFromCart({ id, img, description, title, price, qty })
+                );
+                toast(`${title} Removed!`, {
+                  icon: "👋",
+                });
+              }}
+              size={30}
+              color="#C70039"
+              className="text-gray-600 cursor-pointer lg:self-auto"
+            />
+            <VolunteerActivismIcon
+              onClick={() => {
+                dispatch(addToWishList({ id, title, description, price, img }));
+                toast(`${title} Added to Wishlist!`, {
+                  icon: "🌟",
+                });
+                dispatch(
+                  removeFromCart({ id, img, description, title, price, qty })
+                );
+                toast(`${title} Removed!`, {
+                  icon: "👋",
+                });
+              }}
+              size={30}
+              style={{ fontSize: 30, color: "#3B82F6" }}
+              className="cursor-pointer lg:self-auto"
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="wishList_actions">
+            <MdDelete
+              onClick={() => {
+                dispatch(
+                  removeFromWishList({ id, img, description, title, price })
+                );
+                toast(`${title} Removed!`, {
+                  icon: "👋",
+                });
+              }}
+              size={30}
+              color="#C70039"
+              className="text-gray-600 cursor-pointer lg:self-auto"
+            />
+            <AddShoppingCartIcon
+              onClick={() => {
+                dispatch(
+                  addToCart({
+                    id,
+                    title,
+                    description,
+                    price,
+                    location: "cart",
+                    img,
+                    qty: 1,
+                  })
+                );
+                dispatch(
+                  removeFromWishList({ id, img, description, title, price })
+                );
+                toast(`${title} Added`, {
+                  icon: "👋",
+                });
+              }}
+              size={30}
+              color="#C70039"
+              className="text-gray-600 cursor-pointer lg:self-auto"
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };
