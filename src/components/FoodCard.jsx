@@ -1,53 +1,61 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/slices/CartSlice";
-import { addToWishList } from "../redux/slices/WishListSlice";
-import { CiShoppingCart } from "react-icons/ci";
-import { IoIosHeartEmpty } from "react-icons/io";
-import '../CSS/FoodCard.css'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch,useSelector } from 'react-redux';
+import { addToCart } from '../redux/slices/CartSlice';
+import { addToWishList } from '../redux/slices/WishListSlice';
+import { CiShoppingCart } from 'react-icons/ci';
+import { IoIosHeartEmpty } from 'react-icons/io';
+import { Card, CardImg, CardBody, CardTitle, CardText, Button } from 'react-bootstrap';
+import '../CSS/FoodCard.css';
 
-const ProductCard = ({ id, title, price, description, img, rating, handleToast }) => {
+const ProductCard = ({ id, title, price, description, img, handleToast }) => {
+  const userDetails = useSelector((state)=>state.auth.user)
+  console.log(userDetails);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const addToCartHandler = () => {
     const location = 'cart';
-    dispatch(addToCart({ id, title, description, price,location, img, qty: 1 }));
-    handleToast(title, 'added to cart');
+    if(userDetails)
+      {
+        dispatch(addToCart({ id, title, description, price, location, img, qty: 1 }));
+        handleToast(title, 'added to cart');
+      }
+    else{
+      navigate('/login')
+    }
   };
 
   const addToWishlistHandler = () => {
     const location = 'wishlist';
-    dispatch(addToWishList({ id, title, description, price,location, img }));
-    handleToast(title, 'added to wishlist');
+    if(userDetails)
+      {
+        dispatch(addToWishList({ id, title, description, price, location, img }));
+        handleToast(title, 'added to wishlist');
+      }
+    else{
+      navigate('/login')
+    }
   };
 
   return (
-    <div className="font-bold w-[250px] bg-white p-5 flex flex-col rounded-lg gap-2">
-      <img
-        src={img}
-        alt={title}
-        className="w-auto h-[130px] hover:scale-110 cursor-grab transition-all duration-500 ease-in-out"
-      />
-      <div className="text-sm flex justify-between">
-        <h2>{title.slice(0, 50)}...</h2>
-        <span className="text-blue-500">₹{price}</span>
-      </div>
-      <p className="text-sm font-normal">{description.slice(0, 50)}...</p>
-      <div className="flex justify-end gap-x-2.5">
-        <button
-          onClick={addToCartHandler}
-          className="p-1 text-white bg-blue-500 hover:bg-blue-600 text-sm add_to_cart_btn"
-        >
-          <CiShoppingCart size={30}/>
-        </button>
-        <button
-          onClick={addToWishlistHandler}
-          className="p-1 text-white bg-blue-500 hover:bg-blue-600 text-sm add_to_cart_btn"
-        >
-          <IoIosHeartEmpty size={30}/>
-        </button>
-      </div>
-    </div>
+    <Card style={{ width: '18rem', margin: 'auto', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
+      <CardImg variant="top" src={img} alt={title} />
+      <CardBody>
+        <CardTitle>{title.slice(0,20)}...</CardTitle>
+        <CardText>{description.slice(0,20)}...</CardText>
+        <div className="d-flex justify-content-between align-items-center">
+          <CardText className="mb-0">₹{price}</CardText>
+          <div>
+            <Button variant="light" onClick={addToCartHandler} className="me-2">
+              <CiShoppingCart size={24} />
+            </Button>
+            <Button variant="light" onClick={addToWishlistHandler}>
+              <IoIosHeartEmpty size={24} />
+            </Button>
+          </div>
+        </div>
+      </CardBody>
+    </Card>
   );
 };
 

@@ -43,8 +43,9 @@ const Navbar = () => {
   return (
     <nav className="flex flex-col lg:flex-row justify-between items-center py-3 mx-6 mb-10 navbar_main">
       <div className="brand flex items-center gap-2">
+      
         <h1 className="text-2xl font-bold brand_name">Shop Bee</h1>
-        <img src={Logo} alt="Logo" className="brand_img" />
+        <Link to='/home'><img src={Logo} alt="Logo" className="brand_img" /></Link>
       </div>
       <div className="flex items-center gap-4">
         <div className="search_field flex items-center gap-2">
