@@ -68,6 +68,28 @@ const userData = [
   {
     address: {
       geolocation: {
+        lat: "40.3467",
+        long: "-30.1310",
+      },
+      city: "Kolkata",
+      street: "Gardenreach,Ramdashati",
+      number: 563,
+      zipcode: "700024",
+    },
+    id: 11,
+    email: "aniketpaul1997@gmail.com",
+    username: "Aniket",
+    password: "12345",
+    name: {
+      firstname: "Aniket",
+      lastname: "Paul",
+    },
+    phone: "8910827701",
+    __v: 0,
+  },
+  {
+    address: {
+      geolocation: {
         lat: "50.3467",
         long: "-20.1310",
       },

@@ -1,0 +1,7 @@
+.order_details_item
+{
+    padding: 17px 25px;
+    background: white;
+    overflow-y: scroll;
+    max-height: 284px;
+}
