@@ -1,7 +1,17 @@
-.order_details_item
+.order_details_container
 {
     padding: 17px 25px;
     background: white;
     overflow-y: scroll;
     max-height: 284px;
+}
+.order_summery
+{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 6px;
+    padding: 14px;
+}
+.order_summery_header
+{
+    font-size: 30px;
 }

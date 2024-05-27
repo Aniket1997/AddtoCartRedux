@@ -7,6 +7,7 @@ import {
   incrementQty,
   decrementQty,
 } from "../redux/slices/CartSlice";
+import { setOrderDetailsAndMethod } from "../redux/slices/OrderDetailSlice"; // Import the action
 import { toast } from "react-hot-toast";
 import "../CSS/Cart.css";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
@@ -70,7 +71,14 @@ const Cart = () => {
             </h3>
             <div className="cart_checkout_actions">
               <button
-                onClick={() => navigate("/orderDetails")}
+                onClick={() => {
+                  dispatch(setOrderDetailsAndMethod({
+                    method: 'COD', // Default payment method, can be changed later in the order process
+                    order: cartItems,
+                    total: totalPrice
+                  }));
+                  navigate("/orderDetails");
+                }}
                 className="bg-blue-500 font-bold px-3 text-white py-2 rounded-lg mt-3"
               >
                 Checkout
@@ -78,7 +86,7 @@ const Cart = () => {
               {totalPrice === 0 ? (
                 <>
                   <button
-                    onClick={() => navigate("/home")}
+                    onClick={() => navigate("/")}
                     style={{backgroundColor:'rgb(210 210 210)'}}
                     className="bg-grey-500 font-bold px-3 text-black py-2 rounded-lg mt-3"
                   >

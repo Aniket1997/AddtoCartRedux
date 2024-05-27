@@ -6,6 +6,7 @@ import { addToWishList } from '../redux/slices/WishListSlice';
 import { CiShoppingCart } from 'react-icons/ci';
 import { IoIosHeartEmpty } from 'react-icons/io';
 import { Card, CardImg, CardBody, CardTitle, CardText, Button } from 'react-bootstrap';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import '../CSS/FoodCard.css';
 
 const ProductCard = ({ id, title, price, description, img, handleToast }) => {
@@ -37,6 +38,10 @@ const ProductCard = ({ id, title, price, description, img, handleToast }) => {
     }
   };
 
+  const viewProductDetailsHandler = () => {
+    navigate(`/product/${id}`); // Navigate to ViewProductDetails component with product ID
+  };
+
   return (
     <Card style={{ width: '18rem', margin: 'auto', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
       <CardImg variant="top" src={img} alt={title} />
@@ -45,12 +50,15 @@ const ProductCard = ({ id, title, price, description, img, handleToast }) => {
         <CardText>{description.slice(0,20)}...</CardText>
         <div className="d-flex justify-content-between align-items-center">
           <CardText className="mb-0">₹{price}</CardText>
-          <div>
+          <div className='d-flex'>
             <Button variant="light" onClick={addToCartHandler} className="me-2">
               <CiShoppingCart size={24} />
             </Button>
             <Button variant="light" onClick={addToWishlistHandler}>
               <IoIosHeartEmpty size={24} />
+            </Button>
+            <Button variant="light" onClick={viewProductDetailsHandler}>
+              <VisibilityIcon/>
             </Button>
           </div>
         </div>

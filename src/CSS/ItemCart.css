@@ -53,3 +53,8 @@
     }
     
 }
+@media (max-width: 576px) {
+    .order_actions {
+      gap: 7.5rem; 
+    }
+  }

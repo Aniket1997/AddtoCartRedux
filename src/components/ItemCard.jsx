@@ -8,8 +8,15 @@ import {
   decrementQty,
   addToCart,
 } from "../redux/slices/CartSlice";
-import { removeFromWishList } from "../redux/slices/WishListSlice";
-import { addToWishList } from "../redux/slices/WishListSlice"; // Import addToWishList action
+import {
+  removeFromWishList,
+  addToWishList,
+} from "../redux/slices/WishListSlice"; // Import addToWishList and removeFromWishList actions
+import {
+  setOrderDetailsAndMethod,
+  removeFromOrder,
+  clearOrders,
+} from "../redux/slices/OrderDetailSlice"; // Import removeOrder action
 import { toast } from "react-hot-toast";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -85,6 +92,41 @@ const ItemCard = ({ id, title, description, location, qty, price, img }) => {
                 );
                 toast(`${title} Removed!`, {
                   icon: "👋",
+                });
+              }}
+              size={30}
+              style={{ fontSize: 30, color: "#3B82F6" }}
+              className="cursor-pointer lg:self-auto"
+            />
+          </div>
+        </>
+      ) : location === "order" ? (
+        <>
+          <div className="d-flex gap-2 order_actions">
+            <MdDelete
+              onClick={() => {
+                dispatch(removeFromOrder({ id }));
+                toast(`${title} Order Removed!`, { icon: "👋" });
+              }}
+              size={30}
+              color="#C70039"
+              className="text-gray-600 cursor-pointer lg:self-auto"
+            />
+            <VolunteerActivismIcon
+              onClick={() => {
+                dispatch(
+                  addToWishList({
+                    id,
+                    title,
+                    description,
+                    location: "wishlist",
+                    price,
+                    img,
+                  })
+                );
+                dispatch(removeFromOrder({ id }));
+                toast(`${title} Added to Wishlist!`, {
+                  icon: "🌟",
                 });
               }}
               size={30}

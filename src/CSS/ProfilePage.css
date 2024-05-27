@@ -34,3 +34,11 @@
     font-size: 26px;
     border-radius: 6px;
 }
+.view_details
+{
+    background: #1976d2;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+
+}

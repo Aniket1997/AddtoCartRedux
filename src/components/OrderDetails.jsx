@@ -1,84 +1,130 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import StepContent from '@mui/material/StepContent';
-import Button from '@mui/material/Button';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import Navbar from './Navbar';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import Container from '@mui/material/Container';
-import ItemCard from './ItemCard';
-import { removeFromCart, incrementQty, decrementQty,removeAllFromCart } from '../redux/slices/CartSlice';
-import { updateProfile } from '../redux/slices/authSlice';
-import { setOrderDetailsAndMethod } from '../redux/slices/OrderDetailSlice';
-import { toast } from 'react-hot-toast';
-import Card from 'react-bootstrap/Card';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import StepContent from "@mui/material/StepContent";
+import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import Navbar from "./Navbar";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import Container from "@mui/material/Container";
+import ItemCard from "./ItemCard";
+import {
+  removeFromCart,
+  incrementQty,
+  decrementQty,
+  removeAllFromCart,
+} from "../redux/slices/CartSlice";
+
+import { updateProfile } from "../redux/slices/authSlice";
+import {
+  setOrderDetailsAndMethod,
+  removeFromOrder,
+} from "../redux/slices/OrderDetailSlice";
+import { toast } from "react-hot-toast";
+import Card from "react-bootstrap/Card";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import "../CSS/OrderDetails.css";
+
+const platformFee = 100; // Example platform fee
+const deliveryFee = 50; // Example delivery fee
 
 export default function OrderDetails() {
   const [activeStep, setActiveStep] = useState(0);
-  const [coupon, setCoupon] = useState('');
+  const [coupon, setCoupon] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [cardDetails, setCardDetails] = useState({
-    cardNumber: '',
-    expiryDate: '',
-    cvv: '',
-    cardName: '',
+    cardNumber: "",
+    expiryDate: "",
+    cvv: "",
+    cardName: "",
   });
-  const [upiId, setUpiId] = useState('');
+  const [upiId, setUpiId] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  
-  const cartItems = useSelector((state) => state.cart.cart);
+  const orderItems = useSelector((state) => state.OrderSlice.orders);
   const user = useSelector((state) => state.auth.user);
-  const [paymentMethod, setPaymentMethod] = useState('');
-  
-  
+  const [paymentMethod, setPaymentMethod] = useState("");
+
   const [addressData, setAddressData] = useState({
-    phone: user.phone,
-    street: user.address.street,
-    number: user.address.number,
-    city: user.address.city,
-    zipcode: user.address.zipcode,
+    phone: user?.phone || "",
+    street: user?.address?.street || "",
+    number: user?.address?.number || "",
+    city: user?.address?.city || "",
+    zipcode: user?.address?.zipcode || "",
   });
 
-  const totalItemPrice = cartItems.reduce((total, item) => total + item.qty * parseFloat(item.price), 0);
-  const platformFee = 100; // Example platform fee
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
+
+  const totalItemPrice = orderItems.reduce(
+    (total, item) => total + item.qty * parseFloat(item.price),
+    0
+  );
   const gst = totalItemPrice * 0.05; // Example GST calculation (5%)
-  const grandTotal = totalItemPrice + platformFee + gst;
+  const grandTotal = totalItemPrice + platformFee + deliveryFee + gst;
+  const totalQty = orderItems.reduce(
+    (totalQty, item) => totalQty + item.qty,
+    0
+  );
 
   const handleNext = () => {
     if (activeStep === 2) {
-      if (paymentMethod === 'COD') {
-        dispatch(setPaymentMethod('COD'));
-      } else if (paymentMethod === 'UPI') {
-        dispatch(setPaymentMethod('UPI'));
-      } else if (paymentMethod === 'Card') {
-        dispatch(setPaymentMethod('Card'));
+      if (paymentMethod === "COD") {
+        dispatch(
+          setOrderDetailsAndMethod({
+            method: "COD",
+            order: orderItems,
+            total: grandTotal,
+          })
+        );
+      } else if (paymentMethod === "UPI") {
+        dispatch(
+          setOrderDetailsAndMethod({
+            method: "UPI",
+            order: orderItems,
+            total: grandTotal,
+          })
+        );
+      } else if (paymentMethod === "Card") {
+        dispatch(
+          setOrderDetailsAndMethod({
+            method: "Card",
+            order: orderItems,
+            total: grandTotal,
+          })
+        );
       }
-      navigate('/profile');
+      navigate("/profile");
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
   };
 
-  const handleConfirmNext=()=>{
-   dispatch(setOrderDetailsAndMethod({ method: 'COD', order: cartItems }));
-   dispatch(removeAllFromCart())
-    navigate('/profile');
-  }
+  const handleConfirmNext = () => {
+    dispatch(
+      setOrderDetailsAndMethod({
+        method: paymentMethod,
+        order: orderItems,
+        total: grandTotal,
+      })
+    );
+    dispatch(removeAllFromCart());
+    navigate("/profile");
+  };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -98,45 +144,86 @@ export default function OrderDetails() {
   };
 
   const handlePaymentMethodChange = (e) => {
-    dispatch(setPaymentMethod(e.target.value));
+    setPaymentMethod(e.target.value);
   };
+
+  if (!user) {
+    return null; // or return a loader, or a message indicating that the user is being redirected
+  }
 
   return (
     <>
       <Navbar />
       <Container maxWidth="lg">
         <Grid container spacing={2} justifyContent="center" sx={{ mt: 4 }}>
-          <Grid item xs={12} md={8}>
-            <Box sx={{ maxWidth: { xs: 300, sm: 500, md: 700 }, mx: 'auto' }}>
+          <Grid item xs={8} md={8} sm={12}>
+            <Box sx={{ maxWidth: { xs: 300, sm: 500, md: 700 }, mx: "auto" }}>
               <Stepper activeStep={activeStep} orientation="vertical">
                 <Step>
                   <StepLabel>Please Confirm Your Order Details</StepLabel>
                   <StepContent>
-                    {cartItems &&
-                      cartItems.map((food) => (
-                        <ItemCard
-                          key={food.id}
-                          id={food.id}
-                          title={food.title}
-                          price={food.price}
-                          description={food.description}
-                          location={food.location}
-                          img={food.img}
-                          qty={food.qty}
-                          remove={() => {
-                            dispatch(removeFromCart({ id: food.id }));
-                            toast(`${food.title} Removed!`, { icon: '👋' });
-                          }}
-                        />
-                      ))}
+                    <div
+                      className={
+                        !orderItems || orderItems.length === 0
+                          ? "empty_order_container"
+                          : "order_details_container"
+                      }
+                    >
+                      {orderItems ? (
+                        <>
+                          {orderItems.map((food) => (
+                            <ItemCard
+                              key={food.id}
+                              id={food.id}
+                              title={food.title}
+                              price={food.price}
+                              description={food.description}
+                              location="order"
+                              img={food.img}
+                              qty={food.qty}
+                              remove={() => {
+                                dispatch(removeFromOrder({ id: food.id }));
+                                toast(`${food.title} Removed!`, { icon: "👋" });
+                              }}
+                            />
+                          ))}
+                        </>
+                      ) : (
+                        <>
+                          <h1>Your order details is empty</h1>
+                        </>
+                      )}
+                    </div>
                     <Box sx={{ mb: 2 }}>
                       <div>
-                        <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
-                          Continue
-                        </Button>
-                        <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
-                          Back
-                        </Button>
+                        {orderItems && orderItems.length !== 0 ? (
+                          <>
+                            <Button
+                              variant="contained"
+                              onClick={handleNext}
+                              sx={{ mt: 1, mr: 1 }}
+                            >
+                              Continue
+                            </Button>
+                            <Button
+                              disabled={activeStep === 0}
+                              onClick={handleBack}
+                              sx={{ mt: 1, mr: 1 }}
+                            >
+                              Back
+                            </Button>
+                          </>
+                        ) : (
+                          <>
+                            <button
+                              onClick={() => navigate("/")}
+                              style={{ backgroundColor: "rgb(210 210 210)" }}
+                              className="bg-grey-500 font-bold px-3 text-black py-2 rounded-lg mt-3"
+                            >
+                              Continue Shopping
+                            </button>
+                          </>
+                        )}
                       </div>
                     </Box>
                   </StepContent>
@@ -153,7 +240,12 @@ export default function OrderDetails() {
                               variant="outlined"
                               fullWidth
                               value={addressData.phone}
-                              onChange={(e) => setAddressData({ ...addressData, phone: e.target.value })}
+                              onChange={(e) =>
+                                setAddressData({
+                                  ...addressData,
+                                  phone: e.target.value,
+                                })
+                              }
                               sx={{ mb: 2 }}
                             />
                             <TextField
@@ -161,7 +253,12 @@ export default function OrderDetails() {
                               variant="outlined"
                               fullWidth
                               value={addressData.street}
-                              onChange={(e) => setAddressData({ ...addressData, street: e.target.value })}
+                              onChange={(e) =>
+                                setAddressData({
+                                  ...addressData,
+                                  street: e.target.value,
+                                })
+                              }
                               sx={{ mb: 2 }}
                             />
                             <TextField
@@ -169,7 +266,12 @@ export default function OrderDetails() {
                               variant="outlined"
                               fullWidth
                               value={addressData.number}
-                              onChange={(e) => setAddressData({ ...addressData, number: e.target.value })}
+                              onChange={(e) =>
+                                setAddressData({
+                                  ...addressData,
+                                  number: e.target.value,
+                                })
+                              }
                               sx={{ mb: 2 }}
                             />
                             <TextField
@@ -177,7 +279,12 @@ export default function OrderDetails() {
                               variant="outlined"
                               fullWidth
                               value={addressData.city}
-                              onChange={(e) => setAddressData({ ...addressData, city: e.target.value })}
+                              onChange={(e) =>
+                                setAddressData({
+                                  ...addressData,
+                                  city: e.target.value,
+                                })
+                              }
                               sx={{ mb: 2 }}
                             />
                             <TextField
@@ -185,37 +292,56 @@ export default function OrderDetails() {
                               variant="outlined"
                               fullWidth
                               value={addressData.zipcode}
-                              onChange={(e) => setAddressData({ ...addressData, zipcode: e.target.value })}
+                              onChange={(e) =>
+                                setAddressData({
+                                  ...addressData,
+                                  zipcode: e.target.value,
+                                })
+                              }
                               sx={{ mb: 2 }}
                             />
-                            <Button onClick={handleSave} variant="contained" color="primary">
+                            <Button onClick={handleSave} sx={{ mt: 1, mr: 1 }}>
                               Save
                             </Button>
                           </Box>
                         ) : (
-                          <div className="container">
-                            <div className="row">
-                              <div className="col-md-10">
-                                <Typography>{`Phone: ${user.phone}`}</Typography>
-                                <Typography>{`Street: ${user.address.street}`}</Typography>
-                                <Typography>{`Number: ${user.address.number}`}</Typography>
-                                <Typography>{`City: ${user.address.city}`}</Typography>
-                                <Typography>{`Zipcode: ${user.address.zipcode}`}</Typography>
-                              </div>
-                              <div className="col-md-2">
-                                <Button onClick={handleEdit}>Edit</Button>
-                              </div>
-                            </div>
-                          </div>
+                          <Box>
+                            <Typography variant="subtitle1" gutterBottom>
+                              Phone: {addressData.phone}
+                            </Typography>
+                            <Typography variant="subtitle1" gutterBottom>
+                              Street: {addressData.street}
+                            </Typography>
+                            <Typography variant="subtitle1" gutterBottom>
+                              Number: {addressData.number}
+                            </Typography>
+                            <Typography variant="subtitle1" gutterBottom>
+                              City: {addressData.city}
+                            </Typography>
+                            <Typography variant="subtitle1" gutterBottom>
+                              Zipcode: {addressData.zipcode}
+                            </Typography>
+                            <Button onClick={handleEdit} sx={{ mt: 1, mr: 1 }}>
+                              Edit
+                            </Button>
+                          </Box>
                         )}
                       </Card.Body>
                     </Card>
                     <Box sx={{ mb: 2 }}>
                       <div>
-                        <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
+                        <Button
+                          variant="contained"
+                          onClick={handleNext}
+                          sx={{ mt: 1, mr: 1 }}
+                        >
                           Continue
                         </Button>
-                        <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
+                        <Button
+                          disabled={activeStep === 0}
+                          onClick={handleBack}
+                          sx={{ mt: 1, mr: 1 }}
+                        >
                           Back
                         </Button>
                       </div>
@@ -223,41 +349,37 @@ export default function OrderDetails() {
                   </StepContent>
                 </Step>
                 <Step>
-                  <StepLabel
-                    optional={
-                      <Typography variant="caption">Last step</Typography>
-                    }
-                  >
-                    Payment Method
-                  </StepLabel>
+                  <StepLabel>Payment Method</StepLabel>
                   <StepContent>
                     <FormControl component="fieldset">
-                      <FormLabel component="legend">Select Payment Method</FormLabel>
+                      <FormLabel component="legend">
+                        Select Payment Method
+                      </FormLabel>
                       <RadioGroup
                         aria-label="payment-method"
                         name="payment-method"
                         value={paymentMethod}
                         onChange={handlePaymentMethodChange}
                       >
-                        <FormControlLabel value="COD" control={<Radio />} label="Cash On Delivery" />
-                        <FormControlLabel value="UPI" control={<Radio />} label="GPay, PayTm, PhonePe" />
-                        <FormControlLabel value="Card" control={<Radio />} label="Credit/Debit Card" />
+                        <FormControlLabel
+                          value="COD"
+                          control={<Radio />}
+                          label="Cash On Delivery"
+                        />
+                        <FormControlLabel
+                          value="UPI"
+                          control={<Radio />}
+                          label="UPI"
+                        />
+                        <FormControlLabel
+                          value="Card"
+                          control={<Radio />}
+                          label="Card"
+                        />
                       </RadioGroup>
                     </FormControl>
-
-                    {paymentMethod === 'UPI' && (
-                      <TextField
-                        label="Enter your UPI ID"
-                        variant="outlined"
-                        fullWidth
-                        value={upiId}
-                        onChange={(e) => setUpiId(e.target.value)}
-                        sx={{ mt: 2 }}
-                      />
-                    )}
-
-                    {paymentMethod === 'Card' && (
-                      <Box sx={{ mt: 2, background: 'white', padding: '14px' }}>
+                    {paymentMethod === "Card" && (
+                      <Box component="form" noValidate autoComplete="off">
                         <TextField
                           label="Card Number"
                           variant="outlined"
@@ -298,7 +420,7 @@ export default function OrderDetails() {
                           sx={{ mb: 2 }}
                         />
                         <TextField
-                          label="Name on Card"
+                          label="Card Name"
                           variant="outlined"
                           fullWidth
                           value={cardDetails.cardName}
@@ -312,13 +434,20 @@ export default function OrderDetails() {
                         />
                       </Box>
                     )}
-
                     <Box sx={{ mb: 2 }}>
                       <div>
-                        <Button variant="contained" onClick={handleConfirmNext} sx={{ mt: 1, mr: 1 }}>
-                          Finish
+                        <Button
+                          variant="contained"
+                          onClick={handleConfirmNext}
+                          sx={{ mt: 1, mr: 1 }}
+                        >
+                          Confirm Order
                         </Button>
-                        <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
+                        <Button
+                          disabled={activeStep === 0}
+                          onClick={handleBack}
+                          sx={{ mt: 1, mr: 1 }}
+                        >
                           Back
                         </Button>
                       </div>
@@ -335,6 +464,33 @@ export default function OrderDetails() {
                 </Paper>
               )}
             </Box>
+          </Grid>
+          <Grid item xs={4} md={4} sm={12}>
+            <Card>
+              <Card.Body>
+                <Typography variant="h6" gutterBottom>
+                  Order Summary
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Product Quantity: {totalQty}
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Total Price: {totalItemPrice.toFixed(2)}
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Platform Fee: {platformFee.toFixed(2)}
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Delivery Fee: {deliveryFee.toFixed(2)}
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  GST: {gst.toFixed(2)}
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Total: {grandTotal.toFixed(2)}
+                </Typography>
+              </Card.Body>
+            </Card>
           </Grid>
         </Grid>
       </Container>

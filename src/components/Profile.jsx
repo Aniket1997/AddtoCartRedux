@@ -14,7 +14,8 @@ import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import '../CSS/ProfilePage.css'
+import '../CSS/ProfilePage.css';
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const steps = [
@@ -25,9 +26,10 @@ const Profile = () => {
 
   const user = useSelector((state) => state.auth.user);
   const orderItems = useSelector((state) => state.OrderSlice);
-  console.log(orderItems.orders);
+  console.log(orderItems);
   
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -57,6 +59,10 @@ const Profile = () => {
     dispatch(updateProfile(formData)); // Assuming you have an action to update the profile in your Redux slice
     setIsEditing(false);
   };
+
+  const handleViewProductDetails=(id)=>{
+    navigate(`/product/${id}`)
+  }
 
   return (
     <>
@@ -221,7 +227,7 @@ const Profile = () => {
                           <div className="col-md-4">Expected Delivary</div>
                         </div>
                       </div>
-                      {orderItems.orders[0].map((item, index) => 
+                      {orderItems.orders.map((item, index) => 
                       (
                         <Accordion key={index} m-1>
                           <AccordionSummary
@@ -253,10 +259,14 @@ const Profile = () => {
                           </AccordionSummary>
                           <AccordionDetails>
                           <Typography>
-                            <p><strong>Title:</strong> {item.title}</p>
-                            <p><strong>Description:</strong> {item.description}</p>
+                          <div className="d-flex justify-content-between align-items-center m-3">
                             <p><strong>Price:</strong> ${item.price}</p>
                             <p><strong>Payment Method :</strong>{orderItems.method}</p>
+                            <button className="view_details" onClick={() => handleViewProductDetails(item.id)}>
+                              View Detail
+                            </button>
+                            </div>
+                            
                           </Typography>
                               
                               <Box sx={{ width: "100%" }}>

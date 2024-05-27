@@ -45,7 +45,7 @@ const Navbar = () => {
       <div className="brand flex items-center gap-2">
       
         <h1 className="text-2xl font-bold brand_name">Shop Bee</h1>
-        <Link to='/home'><img src={Logo} alt="Logo" className="brand_img" /></Link>
+        <Link to='/'><img src={Logo} alt="Logo" className="brand_img" /></Link>
       </div>
       <div className="flex items-center gap-4">
         <div className="search_field flex items-center gap-2">
