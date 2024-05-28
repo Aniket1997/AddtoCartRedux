@@ -1,17 +1,24 @@
-.order_details_container
-{
+.order_details_container {
     padding: 17px 25px;
     background: white;
     overflow-y: scroll;
     max-height: 284px;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
 }
-.order_summery
-{
+
+/* For Chrome, Safari, and Edge */
+.order_details_container::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.order_summery {
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 6px;
     padding: 14px;
 }
-.order_summery_header
-{
+
+.order_summery_header {
     font-size: 30px;
 }

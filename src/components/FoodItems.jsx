@@ -40,18 +40,19 @@ const FoodItems = () => {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="flex flex-wrap gap-10  justify-center lg:justify-center gap-6 mx-6 my-10">
+      <div className="flex flex-wrap gap-10 justify-center lg:justify-center gap-6 mx-6 my-10">
         {currentItems.map((food) => (
-          <FoodCard
-            key={food.id}
-            id={food.id}
-            title={food.title}
-            price={food.price}
-            description={food.description}
-            img={food.image}
-            rating={food.rating} // Assuming rating is a part of the food data
-            handleToast={handleToast}
-          />
+          <div key={food.id} className="food-card-container">
+            <FoodCard
+              id={food.id}
+              title={food.title}
+              price={food.price}
+              description={food.description}
+              img={food.image}
+              rating={food.rating} // Assuming rating is a part of the food data
+              handleToast={handleToast}
+            />
+          </div>
         ))}
       </div>
       {/* Pagination Controls */}
