@@ -2,3 +2,13 @@
 {
     border-radius: 50%;
 }
+.title-text {
+    /* Default font size */
+  }
+  
+  @media (max-width: 576px) {
+    .title-text {
+      font-size: 10px; /* Adjust as needed */
+    }
+  }
+  

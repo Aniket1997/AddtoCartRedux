@@ -40,23 +40,25 @@ const FoodItems = () => {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="flex flex-wrap gap-10 justify-center lg:justify-center gap-6 mx-6 my-10">
-        {currentItems.map((food) => (
-          <div key={food.id} className="food-card-container">
-            <FoodCard
-              id={food.id}
-              title={food.title}
-              price={food.price}
-              description={food.description}
-              img={food.image}
-              rating={food.rating} // Assuming rating is a part of the food data
-              handleToast={handleToast}
-            />
-          </div>
-        ))}
+      <div className="container">
+        <div className="row row-cols-1 row-cols-sm-2 g-sm-2 row-cols-md-5 g-5">
+          {currentItems.map((food) => (
+            <div key={food.id} className="col">
+              <FoodCard
+                id={food.id}
+                title={food.title}
+                price={food.price}
+                description={food.description}
+                img={food.image}
+                rating={food.rating} // Assuming rating is a part of the food data
+                handleToast={handleToast}
+              />
+            </div>
+          ))}
+        </div>
       </div>
       {/* Pagination Controls */}
-      <div className="flex justify-center my-6 pagination_buttons">
+      <div className="d-flex justify-content-center my-6 pagination_buttons">
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index + 1}
