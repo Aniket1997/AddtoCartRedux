@@ -41,14 +41,12 @@ const ProductCard = ({ id, title, price, description, img, handleToast }) => {
 
   return (
     <Card className="mb-3">
-      <div className="img-wrapper" style={{ padding: '10px' }}>
         <Card.Img 
           variant="top" 
           src={img} 
           alt={title} 
-          style={{ width: '100%', height: '275px', objectFit: 'cover' }}  // Adjust width and object fit as needed
-        />
-      </div>
+          className="card_image img-fluid"
+          />
       <Card.Body>
         <Card.Title className="mb-0">
           <span className="title-text">

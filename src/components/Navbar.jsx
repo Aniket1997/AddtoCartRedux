@@ -47,18 +47,8 @@ const Navbar = () => {
         <h1 className="text-2xl font-bold brand_name">Shop Bee</h1>
         <Link to='/'><img src={Logo} alt="Logo" className="brand_img" /></Link>
       </div>
-      <div className="flex items-center gap-4">
-        <div className="search_field flex items-center gap-2">
-          <GoSearch size={25} />
-          <input
-            type="search"
-            name="search"
-            placeholder="Search here"
-            autoComplete="off"
-            onChange={(e) => dispatch(setSearch(e.target.value))}
-            className="p-3 h-3 text-sm rounded-lg w-full lg:w-[25vw] search_input"
-          />
-        </div>
+      <div className="flex items-center gap-2">
+        
         <Link to="/cart">
           <Badge badgeContent={cartItemSize} color="primary">
             <ShoppingCartIcon color="action" style={{ color: "black" }} />
@@ -100,13 +90,13 @@ const Navbar = () => {
           <>
             <Link
               to="/login"
-              className="btn btn-primary px-4 py-2 rounded-lg text-white"
+              className="login_btn"
             >
               Login
             </Link>
             <Link
               to="/signup"
-              className="btn btn-secondary px-4 py-2 rounded-lg text-white"
+              className="sign_up_btn"
             >
               Signup
             </Link>

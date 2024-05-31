@@ -12,3 +12,35 @@
     }
   }
   
+  .wrapped-image-card {
+    position: relative;
+  }
+  
+  .card_image {
+    float: left;
+    margin-right: 15px;
+    width: 100%; /* Ensures the image takes full width of its container */
+    max-width: 300px; /* Optional: sets a max width */
+    object-fit: cover;
+    height: auto; /* Maintains aspect ratio */
+  }
+  
+  .text-content {
+    overflow: hidden; /* Ensures content wraps around the floated image */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .card_image {
+      width: 100%; 
+      margin-right: 0;
+      float: none; 
+      display: block;
+      margin-bottom: 15px; 
+    }
+  
+    .text-content {
+      overflow: visible; 
+    }
+  }
+  

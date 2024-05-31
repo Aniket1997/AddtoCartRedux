@@ -10,25 +10,31 @@
 }
 .brand_img
 {
-    height: 70px;
-    width: 70px;
+    height: 40px;
+    width: 40px;
     background: #3b82f6;
     border-radius: 11px;
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
     .brand_img {
       height: 39px;
       width: 39px;
-      background: #3b82f6;
-      border-radius: 11px;
-    }
-    
+    } 
+  }
+
+  @media (max-width: 425px) {
+    .brand_img {
+      height: 39px;
+      width: 39px;
+    } 
   }
   
-.brand_name
-{
-    margin-left: 20px;
+
+.brand_name {
+    margin-left: 5px;
+    font-size: 17px !important;
 }
+
 @media (max-width: 640px) {
     .brand_name {
         margin-left: 6px;
@@ -76,3 +82,24 @@
     font-weight: bold;
   }
   
+
+.login_btn
+{
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+    /* box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px; */
+    padding: 6px;
+    color: white;
+    border-radius: 10px;
+    background: #3b82f6;
+    font-size: 12px;
+}  
+.sign_up_btn
+{
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+    /* box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px; */
+    padding: 6px;
+    color: black;
+    border-radius: 10px;
+    background: #f4f4f4;
+    font-size: 12px;
+}
