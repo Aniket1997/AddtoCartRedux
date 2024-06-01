@@ -36,10 +36,7 @@ const ItemCard = ({ id, title, description, location, qty, price, img }) => {
         className="w-30 h-30 lg:w-20 lg:h-20 rounded"
       />
       <div className="flex flex-col flex-1">
-        <h2 className="font-bold text-gray-800">{title}</h2>
-        <p className="text-gray-600 hidden lg:block">
-          {description.slice(0, 200)}...
-        </p>
+      <h2 className="font-bold text-gray-800 text-sm sm:text-base md:text-xl">{title}</h2>
         {location === "cart" ? (
           <>
             <div className="flex mt-2 quantity_item_action">

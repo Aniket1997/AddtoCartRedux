@@ -1,68 +1,37 @@
 /* LandingPage.css */
+
+/* General Styles */
 .landing-page {
   text-align: center;
-  padding: 0px 117px;
+  padding: 0 117px;
 }
 
 .landing-page video {
   margin-top: 20px;
-  /* border: 2px solid #ccc; */
   border-radius: 6%;
 }
 
 .landing_text {
-  padding: 27px 0px;
+  padding: 27px 0;
   text-align: justify;
   display: flex;
   flex-direction: column;
 }
 
-@media (max-width: 640px) {
-  .landing_text {
-    padding: 0px 0px;
-    font-size: 34px;
-    text-align: justify;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
 .button_landing {
   margin-top: 43px;
-    border-radius: 28px;
-    font-size: 16px;
-    width: 153px;
-    background: #3b82f6;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    color: white;
-    padding: 10px;
-}
-.carousel-item {
-  padding: 0px 78px !important;
-  border-radius: 10px !important;
-}
-@media (max-width: 480px) {
-  .carousel-item {
-    padding: 0px 15px !important;
-  }
+  border-radius: 28px;
+  font-size: 16px;
+  width: 153px;
+  background: #3b82f6;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: white;
+  padding: 10px;
 }
 
-@media (max-width: 640px) {
-  .button_landing {
-    /* margin-top: 43px; */
-    margin-top: 0px;
-    border-radius: 35px;
-    font-size: 16px;
-    width: 149px;
-    background: #3b82f6;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    color: white;
-    padding: 10px;
-  }
-  .carousel-inner {
-    padding: 0px 38px !important;
-}
+.carousel-item {
+  padding: 0 78px !important;
+  border-radius: 10px !important;
 }
 
 .landing_text_brand_name {
@@ -79,4 +48,40 @@
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   display: none !important;
+}
+
+/* Media Queries */
+
+/* Styles for devices with max-width of 640px */
+@media (max-width: 640px) {
+  .landing_text {
+    padding: 0;
+    font-size: 34px;
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button_landing {
+    margin-top: 0;
+    border-radius: 35px;
+    font-size: 16px;
+    width: 149px;
+    background: #3b82f6;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    color: white;
+    padding: 10px;
+  }
+
+  .carousel-inner {
+    padding: 0 38px !important;
+  }
+}
+
+/* Styles for devices with max-width of 480px */
+@media (max-width: 480px) {
+  .carousel-item {
+    padding: 0 15px !important;
+  }
 }

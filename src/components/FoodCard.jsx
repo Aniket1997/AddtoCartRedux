@@ -1,37 +1,38 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../redux/slices/CartSlice';
-import { addToWishList } from '../redux/slices/WishListSlice';
-import { CiShoppingCart } from 'react-icons/ci';
-import { IoIosHeartEmpty } from 'react-icons/io';
-import { Card, Button } from 'react-bootstrap';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import '../CSS/FoodCard.css';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../redux/slices/CartSlice";
+import { addToWishList } from "../redux/slices/WishListSlice";
+import { CiShoppingCart } from "react-icons/ci";
+import { IoIosHeartEmpty } from "react-icons/io";
+import { Card, Button } from "react-bootstrap";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import "../CSS/FoodCard.css";
 
 const ProductCard = ({ id, title, price, description, img, handleToast }) => {
   const userDetails = useSelector((state) => state.auth.user);
-  console.log(userDetails);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const addToCartHandler = () => {
-    const location = 'cart';
+    const location = "cart";
     if (userDetails) {
-      dispatch(addToCart({ id, title, description, price, location, img, qty: 1 }));
-      handleToast(title, 'added to cart');
+      dispatch(
+        addToCart({ id, title, description, price, location, img, qty: 1 })
+      );
+      handleToast(title, "added to cart");
     } else {
-      navigate('/login');
+      navigate("/login");
     }
   };
 
   const addToWishlistHandler = () => {
-    const location = 'wishlist';
+    const location = "wishlist";
     if (userDetails) {
       dispatch(addToWishList({ id, title, description, price, location, img }));
-      handleToast(title, 'added to wishlist');
+      handleToast(title, "added to wishlist");
     } else {
-      navigate('/login');
+      navigate("/login");
     }
   };
 
@@ -41,33 +42,29 @@ const ProductCard = ({ id, title, price, description, img, handleToast }) => {
 
   return (
     <Card className="mb-3">
-        <Card.Img 
-          variant="top" 
-          src={img} 
-          alt={title} 
-          className="card_image img-fluid"
-          />
-      <Card.Body>
-        <Card.Title className="mb-0">
-          <span className="title-text">
-            {title.slice(0, 30)}...
+      <Card.Img variant="top" src={img} alt={title} className="card_image" />
+        <Card.Title className="mb-0 px-2">
+          <span className="title-text text-black-800 text-sm sm:text-base md:text-lg">
+            {title.slice(0, 20)}...
           </span>
         </Card.Title>
-        <div className="d-flex justify-content-between align-items-center">
-          <Card.Text className="mb-0">₹{price}</Card.Text>
-          <div className="d-flex">
-            <Button variant="light" onClick={addToCartHandler} className="me-2">
-              <CiShoppingCart size={24} />
-            </Button>
-            <Button variant="light" onClick={addToWishlistHandler} className="me-2">
-              <IoIosHeartEmpty size={24} />
-            </Button>
-            <Button variant="light" onClick={viewProductDetailsHandler}>
-              <VisibilityIcon />
-            </Button>
+      <Card.Footer>
+        <div className="d-flex justify-between items-center mt-2">
+          <Card.Text className="text-sm sm:text-base md:text-lg">
+            ₹{price}
+          </Card.Text>
+          <div className="flex items-center space-x-2">
+            <CiShoppingCart className="icon" onClick={addToCartHandler} />
+
+            <IoIosHeartEmpty className="icon" onClick={addToWishlistHandler} />
+
+            <VisibilityIcon
+              className="icon"
+              onClick={viewProductDetailsHandler}
+            />
           </div>
         </div>
-      </Card.Body>
+      </Card.Footer>
     </Card>
   );
 };

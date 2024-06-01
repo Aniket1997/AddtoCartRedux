@@ -1,134 +1,131 @@
-.brand{
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
+/* Brand Section */
+.brand {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
 }
-@media (max-width: 768px) {
-    .navbar_main {
-        flex-direction: row !important;
-    }
-}
-.brand_img
-{
-    height: 40px;
-    width: 40px;
-    background: #3b82f6;
-    border-radius: 11px;
-}
-@media (max-width: 768px) {
-    .brand_img {
-      height: 39px;
-      width: 39px;
-    } 
-  }
 
-  @media (max-width: 425px) {
-    .brand_img {
-      height: 39px;
-      width: 39px;
-    } 
-  }
-  
-  .brand_name {
-    margin-left: 5px;
-    font-size: 20px !important;
+.brand_img {
+  height: 40px;
+  width: 40px;
+  background: #3b82f6;
+  border-radius: 11px;
 }
+
+.brand_name {
+  margin-left: 5px;
+  font-size: 20px !important;
+}
+
+/* Responsive Styles */
 
 /* Tablets (portrait and smaller) */
 @media (max-width: 1024px) {
-    .brand_name {
-        font-size: 15px !important;
-    }
+  .brand_name {
+    font-size: 15px !important;
+  }
 }
 
 /* Small tablets and large smartphones */
 @media (max-width: 768px) {
-    .brand_name {
-        font-size: 14px !important;
-    }
+  .navbar_main {
+    flex-direction: row !important;
+  }
+
+  .brand_img {
+    height: 39px;
+    width: 39px;
+  }
+
+  .brand_name {
+    font-size: 14px !important;
+  }
 }
 
 /* Smartphones */
 @media (max-width: 576px) {
-    .brand_name {
-        font-size: 13px !important;
-    }
+  .brand_name {
+    font-size: 13px !important;
+  }
 }
 
 /* Small smartphones */
 @media (max-width: 480px) {
-    .brand_name {
-      font-weight: 600 !important;
-      font-size: 19px !important;
-    }
+  .brand_name {
+    font-weight: 600 !important;
+    font-size: 19px !important;
+  }
+
+  .brand_img {
+    height: 39px;
+    width: 39px;
+  }
 }
 
 /* Extra small smartphones */
 @media (max-width: 360px) {
-    .brand_name {
-        font-size: 11px !important;
-    }
+  .brand_name {
+    font-size: 11px !important;
+  }
 }
 
-.search_field
-{
-    display: flex;
-    align-items: center;
-    background-color: white;
-    border-radius: 10px;
-    padding: 6px;
+/* Search Field */
+.search_field {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  padding: 6px;
 }
-.search_input
-{
-    border: none;
-    background: white;
 
+.search_input {
+  border: none;
+  background: white;
 }
+
 .search_input:focus {
-    outline: none;
-    border-color: transparent;
-    box-shadow: none;
-  }
+  outline: none;
+  border-color: transparent;
+  box-shadow: none;
+}
 
-  .cart-container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .cart-icon {
-    position: relative;
-  }
-  
-  .badge {
-    position: absolute;
-    top: -8px;
-    right: -10px;
-    background-color: red;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 50%;
-    font-size: 12px;
-    font-weight: bold;
-  }
-  
+/* Cart Container */
+.cart-container {
+  position: relative;
+  display: inline-block;
+}
 
-.login_btn
-{
+.cart-icon {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Buttons */
+.login_btn,
+.sign_up_btn {
   box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
-    /* box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px; */
-    padding: 6px;
-    color: white;
-    border-radius: 10px;
-    background: #3b82f6;
-    font-size: 12px;
-}  
-.sign_up_btn
-{
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
-    /* box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px; */
-    padding: 6px;
-    color: black;
-    border-radius: 10px;
-    background: #f4f4f4;
-    font-size: 12px;
+  padding: 6px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.login_btn {
+  color: white;
+  background: #3b82f6;
+}
+
+.sign_up_btn {
+  color: black;
+  background: #f4f4f4;
 }

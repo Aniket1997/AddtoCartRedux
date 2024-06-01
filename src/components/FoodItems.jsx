@@ -3,6 +3,7 @@ import FoodCard from "./FoodCard.jsx";
 import FoodData from "../data/FoodData.js";
 import toast, { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
+import Row from 'react-bootstrap/Row';
 import '../CSS/FoodItems.css';
 
 const FoodItems = () => {
@@ -41,7 +42,7 @@ const FoodItems = () => {
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <div className="container">
-        <div className="row row-cols-1 row-cols-sm-2 g-sm-2 row-cols-md-5 g-5">
+      <Row xs={2} md={5} className="g-4">
           {currentItems.map((food) => (
             <div key={food.id} className="col">
               <FoodCard
@@ -55,7 +56,7 @@ const FoodItems = () => {
               />
             </div>
           ))}
-        </div>
+        </Row>
       </div>
       {/* Pagination Controls */}
       <div className="d-flex justify-content-center my-6 pagination_buttons">
