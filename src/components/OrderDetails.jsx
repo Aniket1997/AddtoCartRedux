@@ -154,9 +154,9 @@ export default function OrderDetails() {
   return (
     <>
       <Navbar />
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 4, md: 6 } }}>
         <Grid container spacing={2} justifyContent="center" sx={{ mt: 4 }}>
-          <Grid item xs={8} md={8} sm={12}>
+          <Grid item xs={12} md={8}>
             <Box sx={{ maxWidth: { xs: 300, sm: 500, md: 700 }, mx: "auto" }}>
               <Stepper activeStep={activeStep} orientation="vertical">
                 <Step>
@@ -465,7 +465,7 @@ export default function OrderDetails() {
               )}
             </Box>
           </Grid>
-          <Grid item xs={4} md={4} sm={12}>
+          <Grid item xs={12} md={4}>
             <Card>
               <Card.Body>
                 <Typography variant="h6" gutterBottom>

@@ -17,7 +17,7 @@ const WishList = () => {
         <div className="flex items-center mb-5" style={{ gap: "10px" }}>
           <button
             onClick={() => navigate("/")}
-            className="bg-blue-500 font-bold px-3 text-white py-3 rounded-lg"
+            className="bg-blue-500 font-bold px-1 text-white py-1 rounded-lg"
           >
             <KeyboardBackspaceIcon />
           </button>
@@ -26,9 +26,7 @@ const WishList = () => {
         <div className="wishlist_items">
           {wishlistItems.length === 0 ? (
             <>
-            <h1 style={{
-              fontSize:"100px"
-            }}>Wish List Is Empty</h1>
+            <h1 className="text-xl sm:text-sm md:text-base">Wish List Is Empty</h1>
             <button
                     onClick={() => navigate("/")}
                     style={{backgroundColor:'rgb(210 210 210)'}}

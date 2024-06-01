@@ -28,7 +28,7 @@ const Cart = () => {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto my-10 p-5">
+      <div className="container p-5">
         <div className="flex items-center mb-5" style={{ gap: "10px" }}>
           <button
             onClick={() => navigate("/")}

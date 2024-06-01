@@ -14,7 +14,7 @@ import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import '../CSS/ProfilePage.css';
+import "../CSS/ProfilePage.css";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
@@ -27,7 +27,7 @@ const Profile = () => {
   const user = useSelector((state) => state.auth.user);
   const orderItems = useSelector((state) => state.OrderSlice);
   console.log(orderItems);
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -60,9 +60,9 @@ const Profile = () => {
     setIsEditing(false);
   };
 
-  const handleViewProductDetails=(id)=>{
-    navigate(`/product/${id}`)
-  }
+  const handleViewProductDetails = (id) => {
+    navigate(`/product/${id}`);
+  };
 
   return (
     <>
@@ -212,88 +212,87 @@ const Profile = () => {
                   </div>
                 </div>
                 <div className="col-md-8">
-                   <div className="order_header">
-                   <IoCubeOutline className="order_icon"/>
+                  <div className="order_header">
+                    <IoCubeOutline className="order_icon" />
                     Order Details
-                   </div>
-                   
-                    <div>
-                      <div className="container">
-                        <div className="row order_details_info">
-                          <div className="col-md-2">Image</div>
-                          <div className="col-md-2">Title</div>
-                          <div className="col-md-2">Quantity</div>
-                          <div className="col-md-2">Status</div>
-                          <div className="col-md-4">Expected Delivary</div>
-                        </div>
+                  </div>
+                  <div class="container-fluid p-0">
+                    <div class="flex flex-row md:flex-col sm:flex-col order_details_info md:g-2">
+                      <div class="col-md-2 mb-2 md:mb-0 sm:text-sm">Image</div>
+                      <div class="col-md-2 mb-2 md:mb-0 sm:text-sm">Title</div>
+                      <div class="col-md-2 mb-2 md:mb-0 sm:text-sm">
+                        Quantity
                       </div>
-                      {orderItems.orders.map((item, index) => 
-                      (
-                        <Accordion key={index} m-1>
-                          <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls={`panel${index + 1}-content`}
-                            id={`panel${index + 1}-header`}
-                          >
-                            {" "}
-                            <div className="container">
-                              <div className="row align-center">
-                                <div className="col-md-2">
-                                  <img src={item.img} alt={item.title} />
-                                </div>
-                                <div className="col-md-2">
-                                  {item.title.slice(0,20)}...
-                                </div>
-                                <div className="col-md-2 text-center">
-                                  {item.qty}
-                                </div>
-                                <div className="col-md-2">
-                                  <span className="order_status">Shipped</span>
-                                </div>
-                                <div className="col-md-4 text-center">
-                                  <span>27th May,2024</span>
-                                </div>
-                              </div>
+                      <div class="col-md-2 mb-2 md:mb-0 sm:text-sm">Status</div>
+                      <div class="col-md-4 sm:text-sm">Expected Delivery</div>
+                    </div>
+                  </div>
+                  {orderItems.orders.map((item, index) => (
+                    <Accordion key={index} className="m-1">
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls={`panel${index + 1}-content`}
+                        id={`panel${index + 1}-header`}
+                      >
+                        <div className="container">
+                          <div className="flex flex-wrap items-center">
+                            <div className="w-full md:w-1/6 sm:w-1/6 lg:w-1/6 mb-2 md:mb-0 sm:mb-0">
+                              <img
+                                src={item.img}
+                                alt={item.title}
+                                className="w-full"
+                              />
                             </div>
-                            {/* Assuming there's a 'title' property in each item */}
-                          </AccordionSummary>
-                          <AccordionDetails>
-                          <Typography>
+                            <div className="w-full md:w-1/6 sm:w-1/6 lg:w-1/6 mb-2 md:mb-0 sm:mb-0">
+                              {item.title.slice(0, 20)}...
+                            </div>
+                            <div className="w-full md:w-1/6 sm:w-1/6 lg:w-1/6 text-center mb-2 md:mb-0 sm:mb-0">
+                              {item.qty}
+                            </div>
+                            <div className="w-full md:w-1/6 sm:w-1/6 lg:w-1/6 mb-2 md:mb-0 sm:mb-0">
+                              <span className="order_status">Shipped</span>
+                            </div>
+                            <div className="w-full md:w-2/6 sm:w-2/6 lg:w-2/6 text-center">
+                              <span>27th May, 2024</span>
+                            </div>
+                          </div>
+                        </div>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <Typography>
                           <div className="d-flex justify-content-between align-items-center m-3">
-                            <p><strong>Price:</strong> ${item.price}</p>
-                            <p><strong>Payment Method :</strong>{orderItems.method}</p>
-                            <button className="view_details" onClick={() => handleViewProductDetails(item.id)}>
+                            <p>
+                              <strong>Price:</strong> ${item.price}
+                            </p>
+                            <p>
+                              <strong>Payment Method :</strong>
+                              {orderItems.method}
+                            </p>
+                            <button
+                              className="view_details"
+                              onClick={() => handleViewProductDetails(item.id)}
+                            >
                               View Detail
                             </button>
-                            </div>
-                            
-                          </Typography>
-                              
-                              <Box sx={{ width: "100%" }}>
-                                <Stepper activeStep={1} alternativeLabel >
-                                  {steps.map((label) => (
-                                    <Step key={label}>
-                                      <StepLabel>{label}</StepLabel>
-                                    </Step>
-                                  ))}
-                                </Stepper>
-                              </Box>
-                              {/* Assuming there's a 'description' property in each item */}
-                            
-                          </AccordionDetails>
-                          {item.method &&
-                            item.method ===
-                              "COD" /* Check if 'method' exists and is 'COD' */ && (
-                              <AccordionActions>
-                                <Button>Cancel Order</Button>
-                              </AccordionActions>
-                            )}
-                        </Accordion>
-                        
-                      ))}
-                      {" "}
-                    </div>
-                  
+                          </div>
+                        </Typography>
+                        <Box sx={{ width: "100%" }}>
+                          <Stepper activeStep={1} alternativeLabel>
+                            {steps.map((label) => (
+                              <Step key={label}>
+                                <StepLabel>{label}</StepLabel>
+                              </Step>
+                            ))}
+                          </Stepper>
+                        </Box>
+                      </AccordionDetails>
+                      {item.method && item.method === "COD" && (
+                        <AccordionActions>
+                          <Button>Cancel Order</Button>
+                        </AccordionActions>
+                      )}
+                    </Accordion>
+                  ))}{" "}
                 </div>
               </div>
             </div>
