@@ -12,7 +12,6 @@
 
 .landing_text {
   padding: 27px 0px;
-  font-size: 49px;
   text-align: justify;
   display: flex;
   flex-direction: column;
@@ -31,13 +30,22 @@
 
 .button_landing {
   margin-top: 43px;
-  border-radius: 28px;
-  font-size: 32px;
-  width: 276px;
-  background: #3b82f6;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  color: white;
-  padding: 10px;
+    border-radius: 28px;
+    font-size: 16px;
+    width: 153px;
+    background: #3b82f6;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    color: white;
+    padding: 10px;
+}
+.carousel-item {
+  padding: 0px 78px !important;
+  border-radius: 10px !important;
+}
+@media (max-width: 480px) {
+  .carousel-item {
+    padding: 0px 15px !important;
+  }
 }
 
 @media (max-width: 640px) {
@@ -45,8 +53,8 @@
     /* margin-top: 43px; */
     margin-top: 0px;
     border-radius: 35px;
-    font-size: 19px;
-    width: 182px;
+    font-size: 16px;
+    width: 149px;
     background: #3b82f6;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     color: white;

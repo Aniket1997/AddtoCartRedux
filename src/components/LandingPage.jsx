@@ -59,32 +59,31 @@ const LandingPage = () => {
       }
     }
 
-    // INJECT CSS
     var css = document.createElement("style");
     css.type = "text/css";
     css.innerHTML = `
     .typewrite > .wrap {
         border-right: 0.08em solid #fff;
-    }
-    @media (max-width: 768px) {
-        .typewrite > .wrap {
-            font-size: 20px; /* Adjust font size for tablets */
-            border-right: 0.05em solid #fff; /* Adjust border size for tablets */
         }
-    }
-    @media (max-width: 480px) {
-        .typewrite > .wrap {
-            font-size: 15px; /* Adjust font size for mobile */
-            border-right: 0.03em solid #fff; /* Adjust border size for mobile */
+        @media (max-width: 768px) {
+            .typewrite > .wrap {
+                font-size: 20px; 
+                border-right: 0.05em solid #fff; 
+            }
         }
-    }
-    @media (min-width: 769px) {
-        .typewrite > .wrap {
-            font-size: 30px; /* Adjust font size for laptops */
-            border-right: 0.1em solid #fff; /* Adjust border size for laptops */
+        @media (max-width: 480px) {
+            .typewrite > .wrap {
+                font-size: 32px;             
+                border-right: 0.03em solid #fff; 
+            }
         }
-    }
-`;
+        @media (min-width: 769px) {
+            .typewrite > .wrap {
+                font-size: 30px; 
+                border-right: 0.1em solid #fff; 
+            }
+        }
+    `;
     document.body.appendChild(css);
   }, []);
 
