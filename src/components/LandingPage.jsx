@@ -5,7 +5,6 @@ import LandingVideo2 from "../assets/LandingPage3.mp4";
 import "../CSS/LandingPage.css";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
-import BeeAnimation from "../assets/BeeAnimetion.mp4";
 
 const LandingPage = () => {
 
@@ -63,7 +62,29 @@ const LandingPage = () => {
     // INJECT CSS
     var css = document.createElement("style");
     css.type = "text/css";
-    css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+    css.innerHTML = `
+    .typewrite > .wrap {
+        border-right: 0.08em solid #fff;
+    }
+    @media (max-width: 768px) {
+        .typewrite > .wrap {
+            font-size: 20px; /* Adjust font size for tablets */
+            border-right: 0.05em solid #fff; /* Adjust border size for tablets */
+        }
+    }
+    @media (max-width: 480px) {
+        .typewrite > .wrap {
+            font-size: 15px; /* Adjust font size for mobile */
+            border-right: 0.03em solid #fff; /* Adjust border size for mobile */
+        }
+    }
+    @media (min-width: 769px) {
+        .typewrite > .wrap {
+            font-size: 30px; /* Adjust font size for laptops */
+            border-right: 0.1em solid #fff; /* Adjust border size for laptops */
+        }
+    }
+`;
     document.body.appendChild(css);
   }, []);
 
@@ -72,16 +93,15 @@ const LandingPage = () => {
       <div className="row">
         <div className="col-md-6 landing_text">
           <h1>
-            <a
-              href="#"
+            <span
               className="typewrite"
               data-period="2000"
-              data-type='[ "Discover Amazing Deals.", "Shop the Latest Trends", "Find Everything You Need."]'
+              data-type='[ "Discover Amazing Deals.", "Shop the Latest Trends.", "Find Everything You Need."]'
             >
               <span className="wrap"></span>
-            </a>
+            </span>
           </h1>
-          <span className="landing_text_brand_name">Shop bee</span>
+          <span className="landing_text_brand_name">Shop Bee</span>
           <button className="button_landing">Grab The Deal</button>
         </div>
         <div className="col-md-6 d-flex justify-content-center">

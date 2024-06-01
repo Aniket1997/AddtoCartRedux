@@ -11,7 +11,7 @@
 }
 
 .landing_text {
-  padding: 71px 0px;
+  padding: 27px 0px;
   font-size: 49px;
   text-align: justify;
   display: flex;
@@ -58,6 +58,7 @@
 }
 
 .landing_text_brand_name {
+  font-size: 30px !important;
   color: #3b82f6;
 }
 
