@@ -73,7 +73,7 @@ const LandingPage = () => {
         }
         @media (max-width: 480px) {
             .typewrite > .wrap {
-                font-size: 32px;             
+                font-size: 20px;             
                 border-right: 0.03em solid #fff; 
             }
         }

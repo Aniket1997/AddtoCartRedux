@@ -31,7 +31,7 @@
   
   .brand_name {
     margin-left: 5px;
-    font-size: 17px !important;
+    font-size: 20px !important;
 }
 
 /* Tablets (portrait and smaller) */
@@ -58,7 +58,8 @@
 /* Small smartphones */
 @media (max-width: 480px) {
     .brand_name {
-        font-size: 12px !important;
+      font-weight: 600 !important;
+      font-size: 19px !important;
     }
 }
 
