@@ -32,11 +32,11 @@ const Cart = () => {
         <div className="flex items-center mb-5" style={{ gap: "10px" }}>
           <button
             onClick={() => navigate("/")}
-            className="bg-blue-500 font-bold px-3 text-white py-3 rounded-lg"
+            className="bg-blue-500 font-bold px-1 text-white py-1 rounded-lg"
           >
             <KeyboardBackspaceIcon />
           </button>
-          <h1 className="text-3xl font-bold">My Cart</h1>
+          <h1 className="text-xl font-bold">My Cart</h1>
         </div>
         <div className="cart_items">
           {cartItems &&

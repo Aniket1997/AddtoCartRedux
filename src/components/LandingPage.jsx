@@ -104,7 +104,7 @@ const LandingPage = () => {
           <button className="button_landing">Grab The Deal</button>
         </div>
         <div className="col-md-6 d-flex justify-content-center">
-          <Carousel className="custom-carousel">
+          <Carousel className="custom-carousel" controls={false}>
             <Carousel.Item>
               <video autoPlay muted loop className="d-block w-90 p-2">
                 <source src={LandingVideo} type="video/mp4" />

@@ -42,7 +42,7 @@ const FoodItems = () => {
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <div className="container">
-      <Row xs={2} md={5} className="g-4">
+      <Row xs={2} md={5} className="g-2">
           {currentItems.map((food) => (
             <div key={food.id} className="col">
               <FoodCard

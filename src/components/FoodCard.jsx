@@ -41,7 +41,7 @@ const ProductCard = ({ id, title, price, description, img, handleToast }) => {
   };
 
   return (
-    <Card className="mb-3">
+    <Card className="mb-3 card_food">
       <Card.Img variant="top" src={img} alt={title} className="card_image" />
         <Card.Title className="mb-0 px-2">
           <span className="title-text text-black-800 text-sm sm:text-base md:text-lg">
@@ -49,17 +49,18 @@ const ProductCard = ({ id, title, price, description, img, handleToast }) => {
           </span>
         </Card.Title>
       <Card.Footer>
-        <div className="d-flex justify-between items-center mt-2">
+        <div className="d-flex justify-between items-center mt-2 g-2">
           <Card.Text className="text-sm sm:text-base md:text-lg">
             ₹{price}
           </Card.Text>
           <div className="flex items-center space-x-2">
-            <CiShoppingCart className="icon" onClick={addToCartHandler} />
+            <CiShoppingCart className="icon" onClick={addToCartHandler} cursor="pointer"/>
 
-            <IoIosHeartEmpty className="icon" onClick={addToWishlistHandler} />
+            <IoIosHeartEmpty className="icon" onClick={addToWishlistHandler} cursor="pointer"/>
 
             <VisibilityIcon
               className="icon"
+              cursor="pointer"
               onClick={viewProductDetailsHandler}
             />
           </div>
