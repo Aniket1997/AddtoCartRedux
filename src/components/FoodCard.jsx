@@ -44,7 +44,7 @@ const ProductCard = ({ id, title, price, description, img, handleToast }) => {
     <Card className="mb-3 card_food">
       <Card.Img variant="top" src={img} alt={title} className="card_image" />
         <Card.Title className="mb-0 px-2">
-          <span className="title-text text-black-800 text-sm sm:text-base md:text-lg">
+          <span className="title-text text-black-800 text-sm sm:text-base md:text-lg food_title">
             {title.slice(0, 20)}...
           </span>
         </Card.Title>
