@@ -26,7 +26,7 @@ const ItemCard = ({ id, title, description, location, qty, price, img }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="flex flex-row lg:flex-col sm:flex-col md:flex-col items-center md:gap-2 shadow-md rounded-lg sm:p-1 md:p-1 p-1 min-h-[160px]">
+    <div className="flex flex-row lg:flex-col sm:flex-col md:flex-col items-center md:gap-2 shadow-md rounded-lg sm:p-1 md:p-1 p-1 min-h-[90px]">
       <img
         src={img}
         alt={title}

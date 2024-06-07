@@ -12,12 +12,14 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { logout } from "../redux/slices/authSlice";
+import { logout } from "../redux/slices/AuthSlice";
+import { MdSpaceDashboard } from "react-icons/md";
 
 const Navbar = () => {
   const cartItems = useSelector((state) => state.cart.cart);
   const wishListItem = useSelector((state) => state.wishlist.wishList);
   const auth = useSelector((state) => state.auth);
+  const isAdmin = useSelector((state) => state.auth?.user?.isAdmin);
   const isLoggedIn = auth.isLoggedIn; // Get isLoggedIn status
   const navigate = useNavigate();
   const cartItemSize = cartItems.length;
@@ -59,6 +61,12 @@ const Navbar = () => {
             <FavoriteIcon size={25} className="cursor-pointer" />
           </Badge>
         </Link>
+        {isAdmin &&
+          <Link to="/dashboard">
+            <MdSpaceDashboard size={25} className="cursor-pointer" />
+        </Link>
+        }
+        
         {/* Conditional rendering based on isLoggedIn status */}
         {isLoggedIn ? (
           <>

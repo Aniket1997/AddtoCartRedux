@@ -1,0 +1,14 @@
+.chart_container canvas
+{
+    background: white !important;
+    border-radius: 10px !important;
+    padding: 22px !important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+
+}
+.notification_card_header
+{
+    background: white;
+    margin-top: 10px;
+    border: none;
+}
