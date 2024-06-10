@@ -1,0 +1,32 @@
+.signup-root {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+  }
+  
+  .signup-form-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .signup-form-title {
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+  
+  .signup-form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .file-input {
+    display: block;
+  }
+  
+  .submit-button {
+    margin-top: 1rem;
+  }
+  

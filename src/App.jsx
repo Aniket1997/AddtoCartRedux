@@ -13,6 +13,8 @@ import ViewProductDetail from "./components/ViewProductDetail"; // Import ViewPr
 import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Products from "./components/Dashboard/Products";
+import VendorSignup from "./components/Vendor/VendorSignup";
+import VendorListAction from "./components/Dashboard/VendorListActions";
 
 const App = () => {
   return (
@@ -26,8 +28,10 @@ const App = () => {
         <Route path="/product/:id" element={<ViewProductDetail />} />
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/products" element={<Products />} />
+        <Route path="/vendors" element={<VendorListAction/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/vendorSignup" element={<VendorSignup/>}/>
         <Route path="/success" element={<ProtectedRoute element={<Success />} />} />
         <Route path="/*" element={<Error />} />
       </Routes>

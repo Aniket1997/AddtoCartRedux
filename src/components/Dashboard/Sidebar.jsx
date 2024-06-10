@@ -41,6 +41,12 @@ const Sidebar = () => {
               Sales
             </NavLink>
             <NavLink 
+              to="/vendors" 
+              className={({ isActive }) => isActive ? "nav-link nav-link-active" : "nav-link"}
+            >
+              Vendors
+            </NavLink>
+            <NavLink 
               to="/products" 
               className={({ isActive }) => isActive ? "nav-link nav-link-active" : "nav-link"}
             >

@@ -19,13 +19,22 @@
 }
 
 .button_landing {
-  margin-top: 43px;
   border-radius: 28px;
   font-size: 16px;
   width: 153px;
   background: #3b82f6;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   color: white;
+  padding: 10px;
+}
+.button_joining_landing
+{
+  border-radius: 28px;
+  font-size: 16px;
+  width: 153px;
+  background: #f4f4f4;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: black;
   padding: 10px;
 }
 

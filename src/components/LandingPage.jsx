@@ -5,6 +5,8 @@ import LandingVideo2 from "../assets/LandingPage3.mp4";
 import "../CSS/LandingPage.css";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
+import HandshakeIcon from '@mui/icons-material/Handshake';
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
 
@@ -101,7 +103,11 @@ const LandingPage = () => {
             </span>
           </h1>
           <span className="landing_text_brand_name">Shop Bee</span>
-          <button className="button_landing">Grab The Deal</button>
+          <div className="d-flex justify-flex-start align-center mt-10 gap-2">
+            <button className="button_landing">Grab The Deal</button>
+            <Link to="/vendorSignup"> <button className="button_joining_landing">Join Us <HandshakeIcon style={{color:"#3b82f6"}} /></button></Link>
+          </div>
+          
         </div>
         <div className="col-md-6 d-flex justify-content-center">
           <Carousel className="custom-carousel" controls={false}>
